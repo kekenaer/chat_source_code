@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yu.dao.idao.FriendMapper" >
+  <resultMap id="BaseResultMap" type="com.yu.entity.Friend" >
+    <id column="friend_id" property="friendId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="friend_user_id" property="friendUserId" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    friend_id, user_id, friend_user_id, group_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from friends
+    where friend_id = #{friendId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from friends
+    where friend_id = #{friendId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yu.entity.Friend" >
+    insert into friends (friend_id, user_id, friend_user_id, 
+      group_id)
+    values (#{friendId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{friendUserId,jdbcType=INTEGER}, 
+      #{groupId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yu.entity.Friend" >
+    insert into friends
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="friendId != null" >
+        friend_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="friendUserId != null" >
+        friend_user_id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="friendId != null" >
+        #{friendId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="friendUserId != null" >
+        #{friendUserId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yu.entity.Friend" >
+    update friends
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="friendUserId != null" >
+        friend_user_id = #{friendUserId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where friend_id = #{friendId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yu.entity.Friend" >
+    update friends
+    set user_id = #{userId,jdbcType=INTEGER},
+      friend_user_id = #{friendUserId,jdbcType=INTEGER},
+      group_id = #{groupId,jdbcType=INTEGER}
+    where friend_id = #{friendId,jdbcType=INTEGER}
+  </update>
+</mapper>

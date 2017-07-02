@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yu.dao.idao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.yu.entity.Message" >
+    <id column="msg_id" property="msgId" jdbcType="INTEGER" />
+    <result column="msg_from" property="msgFrom" jdbcType="INTEGER" />
+    <result column="msg_receiver" property="msgReceiver" jdbcType="INTEGER" />
+    <result column="msg_content" property="msgContent" jdbcType="VARCHAR" />
+    <result column="msg_sendtime" property="msgSendtime" jdbcType="TIMESTAMP" />
+    <result column="msg_readtime" property="msgReadtime" jdbcType="TIMESTAMP" />
+    <result column="msg_font" property="msgFont" jdbcType="VARCHAR" />
+    <result column="msg_font_size" property="msgFontSize" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    msg_id, msg_from, msg_receiver, msg_content, msg_sendtime, msg_readtime, msg_font, 
+    msg_font_size
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yu.entity.Message" >
+    insert into message (msg_id, msg_from, msg_receiver, 
+      msg_content, msg_sendtime, msg_readtime, 
+      msg_font, msg_font_size)
+    values (#{msgId,jdbcType=INTEGER}, #{msgFrom,jdbcType=INTEGER}, #{msgReceiver,jdbcType=INTEGER}, 
+      #{msgContent,jdbcType=VARCHAR}, #{msgSendtime,jdbcType=TIMESTAMP}, #{msgReadtime,jdbcType=TIMESTAMP}, 
+      #{msgFont,jdbcType=VARCHAR}, #{msgFontSize,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yu.entity.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        msg_id,
+      </if>
+      <if test="msgFrom != null" >
+        msg_from,
+      </if>
+      <if test="msgReceiver != null" >
+        msg_receiver,
+      </if>
+      <if test="msgContent != null" >
+        msg_content,
+      </if>
+      <if test="msgSendtime != null" >
+        msg_sendtime,
+      </if>
+      <if test="msgReadtime != null" >
+        msg_readtime,
+      </if>
+      <if test="msgFont != null" >
+        msg_font,
+      </if>
+      <if test="msgFontSize != null" >
+        msg_font_size,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        #{msgId,jdbcType=INTEGER},
+      </if>
+      <if test="msgFrom != null" >
+        #{msgFrom,jdbcType=INTEGER},
+      </if>
+      <if test="msgReceiver != null" >
+        #{msgReceiver,jdbcType=INTEGER},
+      </if>
+      <if test="msgContent != null" >
+        #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendtime != null" >
+        #{msgSendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgReadtime != null" >
+        #{msgReadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgFont != null" >
+        #{msgFont,jdbcType=VARCHAR},
+      </if>
+      <if test="msgFontSize != null" >
+        #{msgFontSize,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yu.entity.Message" >
+    update message
+    <set >
+      <if test="msgFrom != null" >
+        msg_from = #{msgFrom,jdbcType=INTEGER},
+      </if>
+      <if test="msgReceiver != null" >
+        msg_receiver = #{msgReceiver,jdbcType=INTEGER},
+      </if>
+      <if test="msgContent != null" >
+        msg_content = #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendtime != null" >
+        msg_sendtime = #{msgSendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgReadtime != null" >
+        msg_readtime = #{msgReadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgFont != null" >
+        msg_font = #{msgFont,jdbcType=VARCHAR},
+      </if>
+      <if test="msgFontSize != null" >
+        msg_font_size = #{msgFontSize,jdbcType=INTEGER},
+      </if>
+    </set>
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yu.entity.Message" >
+    update message
+    set msg_from = #{msgFrom,jdbcType=INTEGER},
+      msg_receiver = #{msgReceiver,jdbcType=INTEGER},
+      msg_content = #{msgContent,jdbcType=VARCHAR},
+      msg_sendtime = #{msgSendtime,jdbcType=TIMESTAMP},
+      msg_readtime = #{msgReadtime,jdbcType=TIMESTAMP},
+      msg_font = #{msgFont,jdbcType=VARCHAR},
+      msg_font_size = #{msgFontSize,jdbcType=INTEGER}
+    where msg_id = #{msgId,jdbcType=INTEGER}
+  </update>
+</mapper>
